@@ -1,0 +1,91 @@
+﻿/ Brayan López Mercado
+/ Organización y Arquitectura De Computadoras
+/ Fecha: 24 de Febrero de 2023
+/ Practica 3: Introducción a MARIE pt.2 (Matrices)
+
+Jns ElementosTotales
+JnS capturarMatriz
+JnS printMatriz
+Jns borrarMatriz
+Halt
+
+/ Subrutinas (Funciones)
+ElementosTotales, Hex 000
+Input
+Store ren
+Store ren2
+Input
+Store col
+multiplicacion, Load num // En lugar de usar 2 ciclos, se calcula el total de elementos
+	Add ren
+    Store num
+    Store num2
+    Store num3
+	Load col
+	subt one
+    Store col
+    Skipcond 400
+    Jump multiplicacion
+    JumpI ElementosTotales
+ 
+capturarMatriz,Hex 000 // Llenado de matriz
+fill, Input
+	StoreI pos /guardar dato
+    Load pos
+    Add oneHex /mover posición
+    Store pos
+	Load num /reducir número de iteraciones
+    Subt one
+    Store num
+    Skipcond 400 /si AC=0, sale del loop
+    Jump fill
+    JumpI capturarMatriz
+
+Verify, Hex 000
+  LoadI posv / si la posición 300h esta libre sale de la subrutina
+  Skipcond 400
+  Clear
+  JumpI Verify
+
+printMatriz, Hex 000 
+print, LoadI pos2 / carga el dato que se encuentra en la dirección
+	Output
+    Load pos2 /incrementar el indice
+    Add oneHex
+    Store pos2
+    Load num2
+	Subt one
+    Store num2
+	Skipcond 400
+    Jump print
+	JumpI printMatriz
+
+borrarMatriz, Hex 000 / llena la matriz de 0's 
+empty, Load zero
+	StoreI pos3
+    Load pos3
+    Add oneHex
+    Store pos3
+    Load num3
+    Subt one
+    Store num3
+    Skipcond 400
+    Jump empty
+    JumpI borrarMatriz
+
+
+/Variables    
+ren, DEC 0
+ren2, DEC 0
+col, DEC 0
+totalElements, DEC 0
+num, DEC 0
+num2, DEC 0
+num3, DEC 0
+posv, HEX 300
+pos, HEX 300
+pos2, Hex 300
+pos3, Hex 300
+one, DEC 1
+oneHex, HEX 1
+zero, DEC 0
