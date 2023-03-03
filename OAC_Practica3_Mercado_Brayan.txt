@@ -13,7 +13,6 @@ Halt
 ElementosTotales, Hex 000
 Input
 Store ren
-Store ren2
 Input
 Store col
 multiplicacion, Load num // En lugar de usar 2 ciclos, se calcula el total de elementos
@@ -76,7 +75,6 @@ empty, Load zero
 
 /Variables    
 ren, DEC 0
-ren2, DEC 0
 col, DEC 0
 totalElements, DEC 0
 num, DEC 0
